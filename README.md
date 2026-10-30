@@ -1,3 +1,49 @@
+# Examen práctico U2: Tipo 2
+
+**Autor:** 2020067576 - Paja de la Cruz, Piero Alexander
+**Curso:** SI-988 Soluciones Móviles II
+
+**Tipo de examen:** 2. Permisos mínimos y solicitud de ubicación en contexto. El documento con las evidencias está en [examen/](examen/U2.S12.EXAMEN_DE_UNIDAD_-_PRACTICO.md).
+
+## Lista de cambios
+
+- Se agregó el botón «Usar mi ubicación» en la pantalla principal, que muestra la latitud y la longitud.
+- Se declararon solo los permisos de ubicación precisa y aproximada, y se quitó `READ_GSERVICES`, que ninguna pantalla usa.
+- El permiso se modela con cinco estados propios de la app.
+- El ViewModel recibe el componente de permisos desde fuera y no importa las bibliotecas de permisos ni de GPS.
+- El permiso se pide al tocar la función, después de un diálogo propio con «Continuar» y «Ahora no».
+- Si no se concede, la función sigue disponible escribiendo la ciudad o la dirección.
+- Si queda denegado permanentemente, la app ofrece abrir sus ajustes y no vuelve a solicitarlo.
+- Con ubicación aproximada, la función se ejecuta y muestra «Estás usando ubicación aproximada».
+- Se agregaron cinco pruebas unitarias del flujo de permisos.
+
+## Archivos del proyecto móvil afectados
+
+Todas las rutas están dentro de `proyecto_moviles2_grupo03/`.
+
+| Archivo | Cambio |
+|---|---|
+| `android/app/src/main/AndroidManifest.xml` | Permisos de ubicación y retiro de `READ_GSERVICES` |
+| `android/gradle.properties` | Ajustes agregados por la herramienta de Flutter |
+| `pubspec.yaml`, `pubspec.lock` | `permission_handler`, `geolocator` y `shared_preferences` |
+| `lib/main.dart` | Registro de `UbicacionProvider` con las implementaciones reales |
+| `lib/models/ubicacion.dart` | Nuevo: estados del permiso y entidad `Ubicacion` |
+| `lib/services/permisos_ubicacion.dart` | Nuevo: contratos de permisos y lectura de ubicación |
+| `lib/services/permisos_ubicacion_dispositivo.dart` | Nuevo: implementación con las bibliotecas |
+| `lib/providers/ubicacion_provider.dart` | Nuevo: ViewModel del flujo |
+| `lib/widgets/panel_ubicacion.dart` | Nuevo: panel de la función y diálogo propio |
+| `lib/screens/home_screen.dart` | Muestra el panel en la pantalla principal |
+| `test/ubicacion_provider_test.dart` | Nuevo: pruebas de los ítems 4 y 5 |
+| `test/widget_test.dart` | Registra el nuevo provider |
+
+Para ejecutar las pruebas desde `proyecto_moviles2_grupo03/`:
+
+```bash
+flutter test test/ubicacion_provider_test.dart
+```
+
+---
+
 <div align="center">
 
 <img src="docs/readme/pondera-logo.svg" alt="Logo de Pondera" width="120" height="120">

@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_moviles2_grupo03/screens/home_screen.dart';
 import 'package:proyecto_moviles2_grupo03/providers/componentes_provider.dart';
+import 'package:proyecto_moviles2_grupo03/providers/ubicacion_provider.dart';
+import 'package:proyecto_moviles2_grupo03/services/permisos_ubicacion_dispositivo.dart';
 import 'package:proyecto_moviles2_grupo03/widgets/fila_componente.dart';
 
 void main() {
@@ -10,8 +12,16 @@ void main() {
     final provider = ComponentesProvider();
 
     await tester.pumpWidget(
-      ChangeNotifierProvider.value(
-        value: provider,
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: provider),
+          ChangeNotifierProvider(
+            create: (_) => UbicacionProvider(
+              permisos: PermisosUbicacionDispositivo(),
+              lector: LectorUbicacionDispositivo(),
+            ),
+          ),
+        ],
         child: const MaterialApp(
           home: HomeScreen(),
         ),

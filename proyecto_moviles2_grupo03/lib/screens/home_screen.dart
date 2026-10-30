@@ -9,6 +9,7 @@ import '../widgets/card_resultado.dart';
 import '../widgets/cta_crear_cuenta.dart';
 import '../widgets/fila_componente.dart';
 import '../widgets/linea_pesos.dart';
+import '../widgets/panel_ubicacion.dart';
 import '../services/calculadora_promedio.dart';
 import 'welcome_screen.dart';
 import 'auth_screen.dart';
@@ -123,6 +124,8 @@ class HomeScreen extends StatelessWidget {
                 subtitulo: promedio == null ? subtituloSinNota : null,
                 textoSinNota: textoSinNota,
               ),
+              const SizedBox(height: 12),
+              const PanelUbicacion(),
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),

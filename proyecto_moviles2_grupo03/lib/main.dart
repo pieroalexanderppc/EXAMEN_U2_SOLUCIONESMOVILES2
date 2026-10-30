@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/componentes_provider.dart';
+import 'providers/ubicacion_provider.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/verificar_correo_screen.dart';
+import 'services/permisos_ubicacion_dispositivo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'theme/app_theme.dart';
 
@@ -26,8 +28,16 @@ class PromedioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ComponentesProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ComponentesProvider()),
+        ChangeNotifierProvider(
+          create: (context) => UbicacionProvider(
+            permisos: PermisosUbicacionDispositivo(),
+            lector: LectorUbicacionDispositivo(),
+          ),
+        ),
+      ],
       child: MaterialApp(
         scaffoldMessengerKey: scaffoldMessengerKey,
         title: 'Pondera',
